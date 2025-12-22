@@ -1,6 +1,7 @@
 // Day-2
 // Secret Number Games
 
+// function written using closures
 function numberGame(){
     secretNum=7;
     n=3
