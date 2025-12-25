@@ -6,7 +6,7 @@ function numberGame(){
     secretNum=7;
     n=3
     return function outer(){
-        for(let i=1;i<=3;i++){
+        for(let i=1;i<=n;i++){
             const guess=window.prompt("Guess Secret Number, You have only 3 choices");
             n--;
             if(guess < secretNum){
