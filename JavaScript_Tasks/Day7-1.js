@@ -1,15 +1,31 @@
+class User{
+    constructor(name){
+        this.name=name;
+    }
+}
+class Visitor extends User{
+    constructor(name, visitCount){
+        super(name);
+        this.visitCount=visitCount;
+    }
+}
+
+
 if(!localStorage.getItem("name")){
     const userName=window.prompt("Enter your name:");
     localStorage.setItem("name",userName);
+}   
+
+let visits = getCookie("visitCount");
+if (visits) {
+    visits++;
+} else {
+    visits = 1;
 }
 
-let visits=getCookie("visitCount");
-if(visits){
-    visits++;
-}
-else{
-    visits=1;
-}
+const userName=localStorage.getItem("name");
+const visitor=new Visitor(userName, visits);
+
 
 const printName=localStorage.getItem("name");
 document.getElementById("hello").innerText=`Hello ${printName}, this is your ${visits}st Visit`;
@@ -17,8 +33,8 @@ document.getElementById("hello").innerText=`Hello ${printName}, this is your ${v
 
 function resetLocal(){
     localStorage.clear();
-    window.location.reload();
     updateCookie();
+    window.location.reload();
 }
 
 function setCookie(name, value, daysToLive){
@@ -53,8 +69,4 @@ function updateCookie(){
     window.location.reload();
 }
 
-// document.cookie("visit=1; expires Thu 1 Jan 2026 12:00:00 UTC; path=/;")
-// console.log(document.cookie);
-
-setCookie("visitCount",visits);
-// getCookie("csrftoken");
+setCookie("visitCount", visitor.visitCount);
